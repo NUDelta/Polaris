@@ -1,14 +1,13 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="container">
-        <h1>APP</h1>
-      </div>
-    );
-  }
+class App extends React.Component {
+	render() {
+		return (
+			<div>
+				{this.props.children}
+			</div>
+		);
+	}
 }
 
 export default App;
