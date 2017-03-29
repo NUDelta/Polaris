@@ -63,19 +63,9 @@ class SnapshotInput extends Component {
       	</Row>
       	<Row>
       		<Col xs={12}>
-      			<p>{Strings.Input.MAIN_INSTRUCTIONS_BASE}</p>
-      			<p>{Strings.Input.MAIN_INSTRUCTIONS_TIMING}</p>
-      		</Col>
-      	</Row>
-      	<Row>
-      		<Col xs={12}>
       			<h2>{Strings.Input.THIS_WEEK_TITLE}</h2>
       			<p>{Strings.Input.THIS_WEEK_INSTRUCTIONS}</p>
-      			<RichEditor 
-      				field={"responses.thisWeek.text"}
-      				snapshotID={this.getResponseID()} 
-      				text={this.getResponseText("THIS_WEEK")}
-      			/>
+      			<p>{this.getResponseText("THIS_WEEK")}</p>
       		</Col>
       	</Row>
       	<Row>
@@ -84,27 +74,15 @@ class SnapshotInput extends Component {
 
       			<h4>{Strings.Input.LEARNINGS_PROBLEM_TITLE}</h4>
       			<p>{Strings.Input.LEARNINGS_PROBLEM_INSTRUCTIONS}</p>
-      			<RichEditor 
-      				field={"responses.learnings.problem.text"}
-      				snapshotID={this.getResponseID()} 
-      				text={this.getResponseText("LEARNING_PROBLEMS")}
-      			/>
+      			<p>{this.getResponseText("LEARNING_PROBLEMS")}</p>
 
       			<h4>{Strings.Input.LEARNINGS_INTERVENTION_TITLE}</h4>
       			<p>{Strings.Input.LEARNINGS_INTERVENTION_INSTRUCTIONS}</p>
-      			<RichEditor 
-      				field={"responses.learnings.intervention.text"}
-      				snapshotID={this.getResponseID()} 
-      				text={this.getResponseText("LEARNING_INTERVENTION")}
-      			/>
+      			<p>{this.getResponseText("LEARNING_INTERVENTION")}</p>
 
       			<h4>{Strings.Input.LEARNINGS_RESULTS_TITLE}</h4>
       			<p>{Strings.Input.LEARNINGS_RESULTS_INSTRUCTIONS}</p>
-      			<RichEditor 
-      				field={"responses.learnings.results.text"}
-      				snapshotID={this.getResponseID()} 
-      				text={this.getResponseText("LEARNING_RESULTS")}
-      			/>
+      			<p>{this.getResponseText("LEARNING_RESULTS")}</p>
       		</Col>
       	</Row>
       	<Row>
@@ -113,38 +91,22 @@ class SnapshotInput extends Component {
 
       			<h4>{Strings.Input.REFLECTION_ISSUE_TITLE}</h4>
       			<p>{Strings.Input.REFLECTION_ISSUE_INSTRUCTIONS}</p>
-      			<RichEditor 
-      				field={"responses.reflection.issue.text"}
-      				snapshotID={this.getResponseID()} 
-      				text={this.getResponseText("REFLECTION_ISSUE")}
-      			/>
+      			<p>{this.getResponseText("REFLECTION_ISSUE")}</p>
 
       			<h4>{Strings.Input.REFLECTION_IMPACT_TITLE}</h4>
       			<p>{Strings.Input.REFLECTION_IMPACT_INSTRUCTIONS}</p>
-      			<RichEditor 
-      				field={"responses.reflection.impact.text"}
-      				snapshotID={this.getResponseID()} 
-      				text={this.getResponseText("REFLECTION_IMPACT")}
-      			/>
+      			<p>{this.getResponseText("REFLECTION_IMPACT")}</p>
 
       			<h4>{Strings.Input.REFLECTION_CAUSE_TITLE}</h4>
       			<p>{Strings.Input.REFLECTION_CAUSE_INSTRUCTIONS}</p>
-      			<RichEditor 
-      				field={"responses.reflection.cause.text"}
-      				snapshotID={this.getResponseID()} 
-      				text={this.getResponseText("REFLECTION_CAUSE")}
-      			/>
+      			<p>{this.getResponseText("REFLECTION_CAUSE")}</p>
       		</Col>
       	</Row>
       	<Row>
       		<Col xs={12}>
       			<h2>{Strings.Input.NEXT_STEPS_TITLE}</h2>
       			<p>{Strings.Input.NEXT_STEPS_INSTRUCTIONS}</p>
-      			<RichEditor 
-      				field={"responses.nextSteps.text"}
-      				snapshotID={this.getResponseID()} 
-      				text={this.getResponseText("NEXT_STEPS")}
-      			/>
+      			<p>{this.getResponseText("NEXT_STEPS")}</p>
       		</Col>
       	</Row>
       </Grid>

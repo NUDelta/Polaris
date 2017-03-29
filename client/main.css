@@ -1,5 +1,6 @@
 /* CSS declarations go here */
-.editor {
+#editor {
  border: 1px solid grey;
  padding: 6px;
+ width: 100%;
 }

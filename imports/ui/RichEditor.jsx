@@ -1,15 +1,20 @@
 import React from 'react';
+import { Snapshots } from '../api/snapshots.js';
 
 class RichEditor extends React.Component {
 	constructor(props) {
     super(props);
-    this.state = {
-      text: ""
-    }
   }
 
   changeHandler(e) {
-    this.setState({text: e.target.value});
+    if (this.props.snapshotID) {
+    	let setAction = {}
+    	setAction[this.props.field] = e.target.value;
+
+    	Snapshots.update(this.props.snapshotID, {
+	      $set: setAction,
+	    });
+    }
   }
 
 	render() {
@@ -18,16 +23,11 @@ class RichEditor extends React.Component {
 				<input
             id="editor" 
             onChange={this.changeHandler.bind(this)}
-            value={this.state.text}
+            value={this.props.text}
             autoComplete="off"
         />
 			</div>
 		);
-	}
-	componentWillReceiveProps(nextProps){
-	  if (nextProps.text !== this.props.text) {
-	    this.setState({ text: nextProps.text })
-	  }
 	}
 }
 
