@@ -1,18 +1,33 @@
 import React from 'react';
-import {Editor, EditorState, RichUtils} from 'draft-js';
 
 class RichEditor extends React.Component {
 	constructor(props) {
     super(props);
-    this.state = {editorState: EditorState.createEmpty()};
-    this.onChange = (editorState) => this.setState({editorState});
+    this.state = {
+      text: ""
+    }
   }
+
+  changeHandler(e) {
+    this.setState({text: e.target.value});
+  }
+
 	render() {
 		return (
 			<div className="editor">
-				<Editor editorState={this.state.editorState} onChange={this.onChange} />
+				<input
+            id="editor" 
+            onChange={this.changeHandler.bind(this)}
+            value={this.state.text}
+            autoComplete="off"
+        />
 			</div>
 		);
+	}
+	componentWillReceiveProps(nextProps){
+	  if (nextProps.text !== this.props.text) {
+	    this.setState({ text: nextProps.text })
+	  }
 	}
 }
 
