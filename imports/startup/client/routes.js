@@ -11,7 +11,8 @@ import NotFoundPage from '../../ui/NotFoundPage.jsx';
 export const renderRoutes = () => (
 	<Router history={browserHistory} onUpdate={() => window.scrollTo(0, 0)}>
 		<Route path="/" component={App}>
-			<IndexRoute component={SnapshotInput} />
+			<IndexRoute component={HomePage} />
+			<Route path="/input" component={SnapshotInput} />
 			<Route path="/snapshot" component={Snapshot} />
 			<Route path="*" component={NotFoundPage} />
     </Route>
