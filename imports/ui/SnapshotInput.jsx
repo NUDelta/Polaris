@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
@@ -45,10 +46,14 @@ class SnapshotInput extends Component {
 
 	getResponseID() {
 		let id = null;
-
 		if (this.props.snapshots.length > 0) {
 			id = this.props.snapshots[0]._id;
 		}
+    else {
+      if(this.props.currentUser) {
+        Meteor.call('snapshots.insertEmpty', );
+      }
+    }
 
 		return id;
 	}
@@ -153,7 +158,11 @@ class SnapshotInput extends Component {
 }
 
 export default createContainer(() => {
+  let user = Meteor.user();
   return {
-    snapshots: Snapshots.find({ sprint: { $eq: 1 } }).fetch(),
+    snapshots: Snapshots.find({ 
+      "sprint": { $eq: 1 },
+    }).fetch(),
+    currentUser: Meteor.user(),
   };
-}, SnapshotInput);;
+}, SnapshotInput);

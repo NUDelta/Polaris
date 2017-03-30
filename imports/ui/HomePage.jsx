@@ -75,6 +75,8 @@ class HomePage extends Component {
         	? <div>
         			<h5>Select Your Project</h5>
         			{this.createProjectSelector()}
+        			<br/>
+        			<a href="/input">Fill Out Your Snapshot</a>
         		</div>
         	: <div></div>
 	      }
