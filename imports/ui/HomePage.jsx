@@ -16,7 +16,11 @@ class HomePage extends Component {
 	handleChange(event) {
 		if (event.target.value != 'none') {
 			Meteor.users.update(Meteor.userId(), {
-				$set: {project: event.target.value}
+				$set: {
+					profile: {
+						project: event.target.value
+					}
+				}
 			});
 		}
   }
@@ -24,8 +28,8 @@ class HomePage extends Component {
   getUserProject() {
   	let userProject = "none";
 
-  	if ('project' in Meteor.user()) {
-  		userProject = Meteor.user().project;
+  	if ('profile' in Meteor.user()) {
+  		userProject = Meteor.user().profile.project;
   	}
 
   	return userProject;
