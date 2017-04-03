@@ -89,7 +89,7 @@ class Fixtures {
 				name: "Brain Points"
 			},
 			{
-				name: "Brian Points"
+				name: "Brain Points"
 			},
 			{upsert: true}
 		);
