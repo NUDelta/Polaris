@@ -4,17 +4,22 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import {Card, CardTitle, CardText} from 'material-ui/Card';
-import Drawer from 'material-ui/Drawer';
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import RichEditor from './RichEditor.jsx';
+import Sidebar from './Sidebar.jsx';
 import { Snapshots } from '../api/snapshots.js';
 import Strings from '../strings/strings.js';
 
 class SnapshotInput extends Component {
   constructor(props) {
     super(props);
-    this.state = {open: true};
+
+    this.state = {
+      sidebarContent: {}
+    };
+
+    this.selectSidebarContent = this.selectSidebarContent.bind(this);
   }
 
 	getResponseText(section) {
@@ -25,13 +30,13 @@ class SnapshotInput extends Component {
 				case "THIS_WEEK":
 					text = this.props.snapshots[0].responses.thisWeek.text;
 					break;
-				case "LEARNING_PROBLEMS":
+				case "LEARNINGS_PROBLEM":
 					text = this.props.snapshots[0].responses.learnings.problem.text;
 					break;
-				case "LEARNING_INTERVENTION": 
+				case "LEARNINGS_INTERVENTION": 
 					text = this.props.snapshots[0].responses.learnings.intervention.text;
 					break;
-				case "LEARNING_RESULTS":
+				case "LEARNINGS_RESULTS":
 					text  = this.props.snapshots[0].responses.learnings.results.text;
 					break;
 				case "REFLECTION_ISSUE":
@@ -66,9 +71,38 @@ class SnapshotInput extends Component {
 		return id;
 	}
 
-  handleToggle() {
+  selectSidebarContent(editorID) {
+    let content = {};
+
+    switch(editorID) {
+      case "THIS_WEEK":
+        content.fft = Strings.Input.THIS_WEEK_FFT;
+        break;
+      case "LEARNINGS_PROBLEM":
+        content.fft = Strings.Input.LEARNINGS_PROBLEM_FFT;
+        break;
+      case "LEARNINGS_INTERVENTION": 
+        content.fft = Strings.Input.LEARNINGS_INTERVENTION_FFT;
+        break;
+      case "LEARNINGS_RESULTS":
+        content.fft = Strings.Input.LEARNINGS_RESULTS_FFT;
+        break;
+      case "REFLECTION_ISSUE":
+        content.fft = Strings.Input.REFLECTION_ISSUE_FFT;
+        break;
+      case "REFLECTION_IMPACT":
+        content.fft = Strings.Input.REFLECTION_IMPACT_FFT;
+        break;
+      case "REFLECTION_CAUSE":
+        content.fft = Strings.Input.REFLECTION_CAUSE_FFT;
+        break;
+      case "NEXT_STEPS":
+        content.fft = Strings.Input.NEXT_STEPS_FFT;
+        break;
+    }
+
     this.setState({
-      open: !this.state.open
+      sidebarContent: content
     });
   }
 
@@ -99,7 +133,9 @@ class SnapshotInput extends Component {
                   <RichEditor 
                     field={"responses.thisWeek.text"}
                     snapshotID={this.getResponseID()} 
+                    editorID={"THIS_WEEK"}
                     text={this.getResponseText("THIS_WEEK")}
+                    selectSidebarContent={this.selectSidebarContent}
                   />
                 </CardText>
               </Card>
@@ -118,7 +154,9 @@ class SnapshotInput extends Component {
             			<RichEditor 
             				field={"responses.learnings.problem.text"}
             				snapshotID={this.getResponseID()} 
-            				text={this.getResponseText("LEARNING_PROBLEMS")}
+                    editorID={"LEARNINGS_PROBLEM"}
+            				text={this.getResponseText("LEARNINGS_PROBLEM")}
+                    selectSidebarContent={this.selectSidebarContent}
             			/>
 
             			<h3>{Strings.Input.LEARNINGS_INTERVENTION_TITLE}</h3>
@@ -126,7 +164,9 @@ class SnapshotInput extends Component {
             			<RichEditor 
             				field={"responses.learnings.intervention.text"}
             				snapshotID={this.getResponseID()} 
-            				text={this.getResponseText("LEARNING_INTERVENTION")}
+                    editorID={"LEARNINGS_INTERVENTION"}
+            				text={this.getResponseText("LEARNINGS_INTERVENTION")}
+                    selectSidebarContent={this.selectSidebarContent}
             			/>
 
             			<h3>{Strings.Input.LEARNINGS_RESULTS_TITLE}</h3>
@@ -134,7 +174,9 @@ class SnapshotInput extends Component {
             			<RichEditor 
             				field={"responses.learnings.results.text"}
             				snapshotID={this.getResponseID()} 
-            				text={this.getResponseText("LEARNING_RESULTS")}
+                    editorID={"LEARNINGS_RESULTS"}
+            				text={this.getResponseText("LEARNINGS_RESULTS")}
+                    selectSidebarContent={this.selectSidebarContent}
             			/>
                 </CardText>
               </Card>
@@ -153,7 +195,9 @@ class SnapshotInput extends Component {
             			<RichEditor 
             				field={"responses.reflection.issue.text"}
             				snapshotID={this.getResponseID()} 
+                    editorID={"REFLECTION_ISSUE"}
             				text={this.getResponseText("REFLECTION_ISSUE")}
+                    selectSidebarContent={this.selectSidebarContent}
             			/>
 
             			<h3>{Strings.Input.REFLECTION_IMPACT_TITLE}</h3>
@@ -161,7 +205,9 @@ class SnapshotInput extends Component {
             			<RichEditor 
             				field={"responses.reflection.impact.text"}
             				snapshotID={this.getResponseID()} 
+                    editorID={"REFLECTION_IMPACT"}
             				text={this.getResponseText("REFLECTION_IMPACT")}
+                    selectSidebarContent={this.selectSidebarContent}
             			/>
 
             			<h3>{Strings.Input.REFLECTION_CAUSE_TITLE}</h3>
@@ -169,7 +215,9 @@ class SnapshotInput extends Component {
             			<RichEditor 
             				field={"responses.reflection.cause.text"}
             				snapshotID={this.getResponseID()} 
+                    editorID={"REFLECTION_CAUSE"}
             				text={this.getResponseText("REFLECTION_CAUSE")}
+                    selectSidebarContent={this.selectSidebarContent}
             			/>
                 </CardText>
               </Card>
@@ -187,21 +235,16 @@ class SnapshotInput extends Component {
             			<RichEditor 
             				field={"responses.nextSteps.text"}
             				snapshotID={this.getResponseID()} 
+                    editorID={"NEXT_STEPS"}
             				text={this.getResponseText("NEXT_STEPS")}
+                    selectSidebarContent={this.selectSidebarContent}
             			/>
                 </CardText>
               </Card>
         		</Col>
         	</Row>
         </Grid>
-        <Drawer 
-          width={400}
-          openSecondary={true}
-          open={this.state.open}>
-          <Grid fluid={true}>
-            <h3>Testing</h3>
-          </Grid>
-        </Drawer>
+        <Sidebar content={this.state.sidebarContent}/>
       </div>
     );
   }

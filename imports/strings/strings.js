@@ -25,12 +25,12 @@ export default {
 			"What questions are you trying to answer with your design arguments?",
 			"What user struggles are you meeting?"
 		],
-		"LEARNING_INTERVENTION_FFT": [
+		"LEARNINGS_INTERVENTION_FFT": [
 			"What design are you using to solve this problem?",
 			"What is your technique/technology you are using to solve the problem?",
 			"Why does it work?  Why might it fail?"
 		],
-		"LEARNING_RESULTS_FFT": [
+		"LEARNINGS_RESULTS_FFT": [
 			"What is your deliverable?",
 			"What are your learnings of your work?"
 		],
@@ -65,5 +65,8 @@ export default {
 			"Is the work you are doing actually addressing core user problems/problems in your domain? What is your justification.",
 			"Is your design argument working? How can update it to address the core obstacles better to meet your outcomes?"
 		],
+	},
+	"Sidebar": {
+		"SECTION_FFT": "Food For Thought"
 	}
 }

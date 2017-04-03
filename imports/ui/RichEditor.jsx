@@ -19,8 +19,8 @@ class RichEditor extends React.Component {
     }
   }
 
-  updateSideBar(e) {
-    console.log("HELLO")
+  updateSidebar(e) {
+    this.props.selectSidebarContent(this.props.editorID);
   }
 
 	render() {
@@ -29,7 +29,7 @@ class RichEditor extends React.Component {
         <TextField
           id="editor" 
           onChange={this.changeHandler.bind(this)}
-          onFocus={this.updateSideBar.bind(this)}
+          onFocus={this.updateSidebar.bind(this)}
           value={this.props.text}
           autoComplete="off"
           fullWidth={true}
