@@ -9,6 +9,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import RichEditor from './RichEditor.jsx';
 import Sidebar from './Sidebar.jsx';
 import { Snapshots } from '../api/snapshots.js';
+import { Projects } from '../api/projects.js';
 import Strings from '../strings/strings.js';
 
 class SnapshotInput extends Component {
@@ -59,6 +60,11 @@ class SnapshotInput extends Component {
 
 	getResponseID() {
 		let id = null;
+
+    if (!this.props.currentUser) {
+      return id;
+    }
+
 		if (this.props.snapshots.length > 0) {
 			id = this.props.snapshots[0]._id;
 		}
@@ -252,9 +258,14 @@ class SnapshotInput extends Component {
 
 export default createContainer(() => {
   let user = Meteor.user();
+  let projectIDs = Projects.find({}, {id: 1}).map(function(proj){
+    return proj._id;
+  });
+
   return {
     snapshots: Snapshots.find({ 
       "sprint": { $eq: 1 },
+      "project": { $in: projectIDs}
     }).fetch(),
     currentUser: Meteor.user(),
   };
