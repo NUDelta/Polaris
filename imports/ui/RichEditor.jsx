@@ -1,4 +1,6 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
+
 import { Snapshots } from '../api/snapshots.js';
 
 class RichEditor extends React.Component {
@@ -17,14 +19,21 @@ class RichEditor extends React.Component {
     }
   }
 
+  updateSideBar(e) {
+    console.log("HELLO")
+  }
+
 	render() {
 		return (
 			<div className="editor">
-				<input
-            id="editor" 
-            onChange={this.changeHandler.bind(this)}
-            value={this.props.text}
-            autoComplete="off"
+        <TextField
+          id="editor" 
+          onChange={this.changeHandler.bind(this)}
+          onFocus={this.updateSideBar.bind(this)}
+          value={this.props.text}
+          autoComplete="off"
+          fullWidth={true}
+          multiLine={true}
         />
 			</div>
 		);

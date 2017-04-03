@@ -5,6 +5,7 @@ export default {
 		"MAIN_INSTRUCTIONS_TIMING": "This should take a total of 15 minutes to complete – please do not spend anymore time on it. For the four sections you should spend about 2 to 3 minutes on each section and then review at the end for the remaining time to improve any answers. This a recommendation - just make sure to complete it in 15 minutes.",
 
 		"THIS_WEEK_TITLE": "This week I...",
+		"THIS_WEEK_DETAIL": "List the major areas of work you focused on during this week.",
 		"THIS_WEEK_INSTRUCTIONS": "Please summarize what you have worked on this week.",
 		"THIS_WEEK_FFT": [
 			"Try to keep it concise and use precise language.",
@@ -12,6 +13,7 @@ export default {
 		],
 
 		"LEARNINGS_TITLE": "From this I learned...",
+		"LEARNING_DETAIL": "Think about what you learned from your problems and approaches to addressing them.",
 		"LEARNINGS_PROBLEM_TITLE": "Problem",
 		"LEARNINGS_INTERVENTION_TITLE": "Intervention",
 		"LEARNINGS_RESULTS_TITLE": "Results",
@@ -34,6 +36,7 @@ export default {
 		],
 
 		"REFLECTION_TITLE": "I reflected on...",
+		"REFLECTION_DETAIL": "Reflect on the issues that you faced and the high-level factors that may have caused the issue.",
 		"REFLECTION_ISSUE_TITLE": "Observed Issue",
 		"REFLECTION_IMPACT_TITLE": "Impact",
 		"REFLECTION_CAUSE_TITLE": "High-Level Cause",
@@ -55,6 +58,7 @@ export default {
 		],
 
 		"NEXT_STEPS_TITLE": "Moving forward, I will...",
+		"NEXT_STEPS_DETAIL": "List the things that you will be focusing on for the next week.",
 		"NEXT_STEPS_INSTRUCTIONS": "These are summaries for the  next week bulleted similar to the first section above. Look at your learnings and reflection section to answer this question. Be thoughtful please!",
 		"NEXT_STEPS_FFT": [
 			"What is useful for your project? How can you get the most learning for the least points?",
