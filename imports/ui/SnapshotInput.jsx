@@ -72,14 +72,7 @@ class SnapshotInput extends Component {
       return id;
     }
 
-		if (this.state.snapshot) {
-			id = this.state.snapshot._id;
-		}
-    else {
-      Meteor.call('snapshots.insertEmpty', );
-    }
-
-		return id;
+		return this.state.snapshot._id;
 	}
 
   selectSidebarContent(editorID) {
@@ -269,6 +262,10 @@ class SnapshotInput extends Component {
     let snapshots = this.props.snapshots.filter(function(snap) {
       return snap.project == userProjectID
     });
+
+    if (snapshots.length == 0) {
+      Meteor.call('snapshots.insertEmpty', );
+    }
 
     if (nextProps.snapshots != this.props.snapshots) {
       this.setState({
