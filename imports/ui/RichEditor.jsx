@@ -12,7 +12,7 @@ class RichEditor extends React.Component {
     if (this.props.snapshotID) {
     	let setAction = {}
     	setAction[this.props.field] = e.target.value;
-
+      console.log(this.props.snapshotID + '_____RichEditor');
     	Snapshots.update(this.props.snapshotID, {
 	      $set: setAction,
 	    });

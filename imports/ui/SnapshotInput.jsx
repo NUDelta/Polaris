@@ -17,7 +17,8 @@ class SnapshotInput extends Component {
     super(props);
 
     this.state = {
-      sidebarContent: {}
+      sidebarContent: {},
+      snapshot: null
     };
 
     this.selectSidebarContent = this.selectSidebarContent.bind(this);
@@ -26,31 +27,38 @@ class SnapshotInput extends Component {
 	getResponseText(section) {
 		let text = "";
 
-		if (this.props.snapshots.length > 0) {
+    let snapshot = this.state.snapshot;
+    console.log(snapshot)
+
+    if (!snapshot) {
+      return text;
+    }
+
+		if (this.state.snapshot) {
 			switch(section) {
 				case "THIS_WEEK":
-					text = this.props.snapshots[0].responses.thisWeek.text;
+					text = snapshot.responses.thisWeek.text;
 					break;
 				case "LEARNINGS_PROBLEM":
-					text = this.props.snapshots[0].responses.learnings.problem.text;
+					text = snapshot.responses.learnings.problem.text;
 					break;
 				case "LEARNINGS_INTERVENTION": 
-					text = this.props.snapshots[0].responses.learnings.intervention.text;
+					text = snapshot.responses.learnings.intervention.text;
 					break;
 				case "LEARNINGS_RESULTS":
-					text  = this.props.snapshots[0].responses.learnings.results.text;
+					text  = snapshot.responses.learnings.results.text;
 					break;
 				case "REFLECTION_ISSUE":
-					text  = this.props.snapshots[0].responses.reflection.issue.text;
+					text  = snapshot.responses.reflection.issue.text;
 					break;
 				case "REFLECTION_IMPACT":
-					text  = this.props.snapshots[0].responses.reflection.impact.text;
+					text  = snapshot.responses.reflection.impact.text;
 					break;
 				case "REFLECTION_CAUSE":
-					text  = this.props.snapshots[0].responses.reflection.cause.text;
+					text  = snapshot.responses.reflection.cause.text;
 					break;
 				case "NEXT_STEPS":
-					text  = this.props.snapshots[0].responses.nextSteps.text;
+					text  = snapshot.responses.nextSteps.text;
 					break;
 			}
 		}
@@ -61,19 +69,18 @@ class SnapshotInput extends Component {
 	getResponseID() {
 		let id = null;
 
-    if (!this.props.currentUser) {
+    if (!this.props.currentUser || !this.state.snapshot) {
       return id;
     }
 
-		if (this.props.snapshots.length > 0) {
-			id = this.props.snapshots[0]._id;
+		if (this.state.snapshot) {
+			id = this.state.snapshot._id;
 		}
     else {
-      if(this.props.currentUser) {
-        Meteor.call('snapshots.insertEmpty', );
-      }
+      Meteor.call('snapshots.insertEmpty', );
     }
 
+    console.log(id);
 		return id;
 	}
 
@@ -161,7 +168,7 @@ class SnapshotInput extends Component {
             				field={"responses.learnings.problem.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"LEARNINGS_PROBLEM"}
-            				text={this.getResponseText("LEARNINGS_PROBLEM")}
+            				//text={this.getResponseText("LEARNINGS_PROBLEM")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
 
@@ -171,7 +178,7 @@ class SnapshotInput extends Component {
             				field={"responses.learnings.intervention.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"LEARNINGS_INTERVENTION"}
-            				text={this.getResponseText("LEARNINGS_INTERVENTION")}
+            				//text={this.getResponseText("LEARNINGS_INTERVENTION")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
 
@@ -181,7 +188,7 @@ class SnapshotInput extends Component {
             				field={"responses.learnings.results.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"LEARNINGS_RESULTS"}
-            				text={this.getResponseText("LEARNINGS_RESULTS")}
+            				//text={this.getResponseText("LEARNINGS_RESULTS")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
                 </CardText>
@@ -202,7 +209,7 @@ class SnapshotInput extends Component {
             				field={"responses.reflection.issue.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"REFLECTION_ISSUE"}
-            				text={this.getResponseText("REFLECTION_ISSUE")}
+            				//text={this.getResponseText("REFLECTION_ISSUE")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
 
@@ -212,7 +219,7 @@ class SnapshotInput extends Component {
             				field={"responses.reflection.impact.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"REFLECTION_IMPACT"}
-            				text={this.getResponseText("REFLECTION_IMPACT")}
+            				//text={this.getResponseText("REFLECTION_IMPACT")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
 
@@ -222,7 +229,7 @@ class SnapshotInput extends Component {
             				field={"responses.reflection.cause.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"REFLECTION_CAUSE"}
-            				text={this.getResponseText("REFLECTION_CAUSE")}
+            				//text={this.getResponseText("REFLECTION_CAUSE")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
                 </CardText>
@@ -242,7 +249,7 @@ class SnapshotInput extends Component {
             				field={"responses.nextSteps.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"NEXT_STEPS"}
-            				text={this.getResponseText("NEXT_STEPS")}
+            				//text={this.getResponseText("NEXT_STEPS")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
                 </CardText>
@@ -254,7 +261,31 @@ class SnapshotInput extends Component {
       </div>
     );
   }
+  componentDidUpdate() {
+    console.log("CALLED")
+
+    if (this.state.snapshot) {
+      return null;
+    }  else {
+      console.log("test_CALLED")
+      if (!this.props.currentUser) {
+        return null;
+      }
+
+      let userProjectID = this.props.currentUser.profile.project;
+
+      let snapshots = this.props.snapshots.filter(function(snap) {
+        console.log(userProjectID);
+        return snap.project == userProjectID
+      });
+
+      this.setState({
+        snapshot: snapshots[0]
+      });
+    }
+  }
 }
+
 
 export default createContainer(() => {
   let user = Meteor.user();
