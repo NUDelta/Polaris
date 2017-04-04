@@ -13,7 +13,7 @@ export const renderRoutes = () => (
 		<Route path="/" component={App}>
 			<IndexRoute component={HomePage} />
 			<Route path="/input" component={SnapshotInput} />
-			<Route path="/snapshot" component={Snapshot} />
+			<Route path="/snapshot/:projectID" component={Snapshot} />
 			<Route path="*" component={NotFoundPage} />
     </Route>
 	</Router>

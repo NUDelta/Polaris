@@ -5,53 +5,68 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import RichEditor from './RichEditor.jsx';
 import { Snapshots } from '../api/snapshots.js';
+import { Projects } from '../api/projects.js';
 import Strings from '../strings/strings.js';
 
-class SnapshotInput extends Component {
-	getResponseText(section) {
-		let text = "";
+class Snapshot extends Component {
+  constructor(props) {
+    super(props);
 
-		if (this.props.snapshots.length > 0) {
-			switch(section) {
-				case "THIS_WEEK":
-					text = this.props.snapshots[0].responses.thisWeek.text;
-					break;
-				case "LEARNING_PROBLEMS":
-					text = this.props.snapshots[0].responses.learnings.problem.text;
-					break;
-				case "LEARNING_INTERVENTION": 
-					text = this.props.snapshots[0].responses.learnings.intervention.text;
-					break;
-				case "LEARNING_RESULTS":
-					text  = this.props.snapshots[0].responses.learnings.results.text;
-					break;
-				case "REFLECTION_ISSUE":
-					text  = this.props.snapshots[0].responses.reflection.issue.text;
-					break;
-				case "REFLECTION_IMPACT":
-					text  = this.props.snapshots[0].responses.reflection.impact.text;
-					break;
-				case "REFLECTION_CAUSE":
-					text  = this.props.snapshots[0].responses.reflection.cause.text;
-					break;
-				case "NEXT_STEPS":
-					text  = this.props.snapshots[0].responses.nextSteps.text;
-					break;
-			}
-		}
+    this.state = {
+      snapshot: null
+    };
+  }
 
-		return text;
-	}
+  getResponseText(section) {
+    let text = "";
+
+    let snapshot = this.state.snapshot;
+
+    if (!snapshot) {
+      return text;
+    }
+
+    if (this.state.snapshot) {
+      switch(section) {
+        case "THIS_WEEK":
+          text = snapshot.responses.thisWeek.text;
+          break;
+        case "LEARNINGS_PROBLEM":
+          text = snapshot.responses.learnings.problem.text;
+          break;
+        case "LEARNINGS_INTERVENTION": 
+          text = snapshot.responses.learnings.intervention.text;
+          break;
+        case "LEARNINGS_RESULTS":
+          text  = snapshot.responses.learnings.results.text;
+          break;
+        case "REFLECTION_ISSUE":
+          text  = snapshot.responses.reflection.issue.text;
+          break;
+        case "REFLECTION_IMPACT":
+          text  = snapshot.responses.reflection.impact.text;
+          break;
+        case "REFLECTION_CAUSE":
+          text  = snapshot.responses.reflection.cause.text;
+          break;
+        case "NEXT_STEPS":
+          text  = snapshot.responses.nextSteps.text;
+          break;
+      }
+    }
+
+    return text;
+  }
 
 	getResponseID() {
-		let id = null;
+    let id = null;
 
-		if (this.props.snapshots.length > 0) {
-			id = this.props.snapshots[0]._id;
-		}
+    if (!this.state.snapshot) {
+      return id;
+    }
 
-		return id;
-	}
+    return this.state.snapshot._id;
+  }
 
   render() {
     return (
@@ -112,10 +127,33 @@ class SnapshotInput extends Component {
       </Grid>
     );
   }
+
+  componentDidUpdate(nextProps, nextState) {
+    let projectID = this.props.params.projectID;
+
+    let snapshots = this.props.snapshots.filter(function(snap) {
+      return snap.project == projectID
+    });
+
+    if (snapshots.length != 0) {
+      if (nextProps.snapshots != this.props.snapshots) {
+        this.setState({
+          snapshot: snapshots[0]
+        });
+      }
+    }
+  }
 }
 
 export default createContainer(() => {
+  let projectIDs = Projects.find({}, {id: 1}).map(function(proj){
+    return proj._id;
+  });
+
   return {
-    snapshots: Snapshots.find({ sprint: { $eq: 1 } }).fetch(),
+    snapshots: Snapshots.find({ 
+      "sprint": { $eq: 1 },
+      "project": { $in: projectIDs}
+    }).fetch(),
   };
-}, SnapshotInput);;
+}, Snapshot);
