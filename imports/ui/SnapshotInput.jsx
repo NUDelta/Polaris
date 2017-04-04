@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import {Card, CardTitle, CardText} from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import RichEditor from './RichEditor.jsx';
@@ -74,6 +75,14 @@ class SnapshotInput extends Component {
 
 		return this.state.snapshot._id;
 	}
+
+  getSnapshotLink() {
+    if (!this.props.currentUser) {
+      return null;
+    }
+
+    return "/snapshot/" + this.props.currentUser.profile.project;
+  }
 
   selectSidebarContent(editorID) {
     let content = {};
@@ -247,6 +256,17 @@ class SnapshotInput extends Component {
               </Card>
         		</Col>
         	</Row>
+          <Row>
+            <Col xs={8}>
+              <RaisedButton 
+                label="See Your Snapshot" 
+                primary={true} 
+                fullWidth={true} 
+                className="card"
+                href={this.getSnapshotLink()}
+              />
+            </Col>
+          </Row>
         </Grid>
         <Sidebar content={this.state.sidebarContent}/>
       </div>
