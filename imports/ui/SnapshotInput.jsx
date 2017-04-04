@@ -28,7 +28,6 @@ class SnapshotInput extends Component {
 		let text = "";
 
     let snapshot = this.state.snapshot;
-    console.log(snapshot)
 
     if (!snapshot) {
       return text;
@@ -80,7 +79,6 @@ class SnapshotInput extends Component {
       Meteor.call('snapshots.insertEmpty', );
     }
 
-    console.log(id);
 		return id;
 	}
 
@@ -168,7 +166,7 @@ class SnapshotInput extends Component {
             				field={"responses.learnings.problem.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"LEARNINGS_PROBLEM"}
-            				//text={this.getResponseText("LEARNINGS_PROBLEM")}
+            				text={this.getResponseText("LEARNINGS_PROBLEM")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
 
@@ -178,7 +176,7 @@ class SnapshotInput extends Component {
             				field={"responses.learnings.intervention.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"LEARNINGS_INTERVENTION"}
-            				//text={this.getResponseText("LEARNINGS_INTERVENTION")}
+            				text={this.getResponseText("LEARNINGS_INTERVENTION")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
 
@@ -188,7 +186,7 @@ class SnapshotInput extends Component {
             				field={"responses.learnings.results.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"LEARNINGS_RESULTS"}
-            				//text={this.getResponseText("LEARNINGS_RESULTS")}
+            				text={this.getResponseText("LEARNINGS_RESULTS")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
                 </CardText>
@@ -209,7 +207,7 @@ class SnapshotInput extends Component {
             				field={"responses.reflection.issue.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"REFLECTION_ISSUE"}
-            				//text={this.getResponseText("REFLECTION_ISSUE")}
+            				text={this.getResponseText("REFLECTION_ISSUE")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
 
@@ -219,7 +217,7 @@ class SnapshotInput extends Component {
             				field={"responses.reflection.impact.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"REFLECTION_IMPACT"}
-            				//text={this.getResponseText("REFLECTION_IMPACT")}
+            				text={this.getResponseText("REFLECTION_IMPACT")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
 
@@ -229,7 +227,7 @@ class SnapshotInput extends Component {
             				field={"responses.reflection.cause.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"REFLECTION_CAUSE"}
-            				//text={this.getResponseText("REFLECTION_CAUSE")}
+            				text={this.getResponseText("REFLECTION_CAUSE")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
                 </CardText>
@@ -249,7 +247,7 @@ class SnapshotInput extends Component {
             				field={"responses.nextSteps.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"NEXT_STEPS"}
-            				//text={this.getResponseText("NEXT_STEPS")}
+            				text={this.getResponseText("NEXT_STEPS")}
                     selectSidebarContent={this.selectSidebarContent}
             			/>
                 </CardText>
@@ -261,28 +259,23 @@ class SnapshotInput extends Component {
       </div>
     );
   }
-  componentDidUpdate() {
-    console.log("CALLED")
-
-    if (this.state.snapshot) {
+  componentDidUpdate(nextProps, nextState) {
+    if (!this.props.currentUser) {
       return null;
-    }  else {
-      console.log("test_CALLED")
-      if (!this.props.currentUser) {
-        return null;
-      }
+    }
 
-      let userProjectID = this.props.currentUser.profile.project;
+    let userProjectID = this.props.currentUser.profile.project;
 
-      let snapshots = this.props.snapshots.filter(function(snap) {
-        console.log(userProjectID);
-        return snap.project == userProjectID
-      });
+    let snapshots = this.props.snapshots.filter(function(snap) {
+      return snap.project == userProjectID
+    });
 
+    if (nextProps.snapshots != this.props.snapshots) {
       this.setState({
         snapshot: snapshots[0]
       });
     }
+    
   }
 }
 
