@@ -12,6 +12,10 @@ import { Snapshots } from '../api/snapshots.js';
 import { Projects } from '../api/projects.js';
 import Strings from '../strings/strings.js';
 
+//import RichTextEditor from 'react-rte-material';
+//import RichMaterialEditor from './RichMaterialEditor.jsx';
+import MyEditor from './MyEditor.jsx';
+
 class SnapshotInput extends Component {
   constructor(props) {
     super(props);
@@ -134,7 +138,7 @@ class SnapshotInput extends Component {
                 />
           			<CardText>
                   <p>{Strings.Input.THIS_WEEK_INSTRUCTIONS}</p>
-                  <RichEditor 
+                  <MyEditor
                     field={"responses.thisWeek.text"}
                     snapshotID={this.getResponseID()} 
                     editorID={"THIS_WEEK"}
@@ -155,7 +159,7 @@ class SnapshotInput extends Component {
                 <CardText>
             			<h3>{Strings.Input.LEARNINGS_PROBLEM_TITLE}</h3>
             			<p>{Strings.Input.LEARNINGS_PROBLEM_INSTRUCTIONS}</p>
-            			<RichEditor 
+            			<MyEditor
             				field={"responses.learnings.problem.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"LEARNINGS_PROBLEM"}
@@ -165,7 +169,7 @@ class SnapshotInput extends Component {
 
             			<h3>{Strings.Input.LEARNINGS_INTERVENTION_TITLE}</h3>
             			<p>{Strings.Input.LEARNINGS_INTERVENTION_INSTRUCTIONS}</p>
-            			<RichEditor 
+            			<MyEditor
             				field={"responses.learnings.intervention.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"LEARNINGS_INTERVENTION"}
@@ -175,7 +179,7 @@ class SnapshotInput extends Component {
 
             			<h3>{Strings.Input.LEARNINGS_RESULTS_TITLE}</h3>
             			<p>{Strings.Input.LEARNINGS_RESULTS_INSTRUCTIONS}</p>
-            			<RichEditor 
+            			<MyEditor
             				field={"responses.learnings.results.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"LEARNINGS_RESULTS"}
@@ -196,7 +200,7 @@ class SnapshotInput extends Component {
                 <CardText>
             			<h3>{Strings.Input.REFLECTION_ISSUE_TITLE}</h3>
             			<p>{Strings.Input.REFLECTION_ISSUE_INSTRUCTIONS}</p>
-            			<RichEditor 
+            			<MyEditor
             				field={"responses.reflection.issue.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"REFLECTION_ISSUE"}
@@ -206,7 +210,7 @@ class SnapshotInput extends Component {
 
             			<h3>{Strings.Input.REFLECTION_IMPACT_TITLE}</h3>
             			<p>{Strings.Input.REFLECTION_IMPACT_INSTRUCTIONS}</p>
-            			<RichEditor 
+            			<MyEditor
             				field={"responses.reflection.impact.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"REFLECTION_IMPACT"}
@@ -216,7 +220,7 @@ class SnapshotInput extends Component {
 
             			<h3>{Strings.Input.REFLECTION_CAUSE_TITLE}</h3>
             			<p>{Strings.Input.REFLECTION_CAUSE_INSTRUCTIONS}</p>
-            			<RichEditor 
+            			<MyEditor
             				field={"responses.reflection.cause.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"REFLECTION_CAUSE"}
@@ -236,7 +240,7 @@ class SnapshotInput extends Component {
                 />
                 <CardText>
             			<p>{Strings.Input.NEXT_STEPS_INSTRUCTIONS}</p>
-            			<RichEditor 
+            			<MyEditor
             				field={"responses.nextSteps.text"}
             				snapshotID={this.getResponseID()} 
                     editorID={"NEXT_STEPS"}
