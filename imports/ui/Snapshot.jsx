@@ -81,7 +81,7 @@ class Snapshot extends Component {
       <Grid fluid={true} className="snapshotRoot">
       	<Row>
       		<Col xs={12}>
-      			<h1>{Strings.Input.MAIN_TILE}</h1>
+      			<h1>{Strings.Snapshot.MAIN_TILE}</h1>
       		</Col>
       	</Row>
       	<Row>

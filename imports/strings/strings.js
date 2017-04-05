@@ -66,6 +66,9 @@ export default {
 			"Is your design argument working? How can update it to address the core obstacles better to meet your outcomes?"
 		],
 	},
+	"Snapshot": {
+		"MAIN_TILE": "Snapshot"
+	},
 	"Sidebar": {
 		"SECTION_FFT": "Food For Thought"
 	}
