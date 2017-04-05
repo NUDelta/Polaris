@@ -26,7 +26,7 @@ class MyEditor extends React.Component {
 
     const config = {
       saveFunction: this.saveToDB.bind(this),
-      debounceTime: 2000,
+      debounceTime: 200,
     	saveAlways: true
     }
 
@@ -80,6 +80,10 @@ class MyEditor extends React.Component {
 
   }
 
+  updateSidebar(e) {
+    this.props.selectSidebarContent(this.props.editorID);
+  }
+
   render() {
     return (
       <div>
@@ -87,6 +91,7 @@ class MyEditor extends React.Component {
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.onChange.bind(this)}
+          onFocus={this.updateSidebar.bind(this)}
           plugins={[this.autosavePlugin, this.autoListPlugin]}
         />
       </div>
@@ -96,6 +101,7 @@ class MyEditor extends React.Component {
   	if(this.props.snapshotID) {
   		if(!this.state.firstEdit) {
   			this.setState({editorState:this.createEditorState()});
+        updateSidebar();
   		}
   	}
   }

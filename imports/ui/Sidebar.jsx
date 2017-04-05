@@ -28,7 +28,7 @@ class Sidebar extends React.Component {
       sidebarSections.push(
         <Row key={"fft"}>
           <Col xs={12}>
-            <h3>{Strings.Sidebar.SECTION_FFT}</h3>
+            <h2>{Strings.Sidebar.SECTION_FFT}</h2>
             <ul>
               {fftElements}
             </ul>
@@ -42,11 +42,12 @@ class Sidebar extends React.Component {
 
 	render() {
 		return (
-			<Drawer 
+			<Drawer
         width={400}
         openSecondary={true}
+        style={{backgroundColor:'#3498db'}}
         open={this.state.open}>
-        <Grid fluid={true}>
+        <Grid fluid={true} className="Sidebar">
           {this.buildSidebarContent()}
         </Grid>
       </Drawer>
