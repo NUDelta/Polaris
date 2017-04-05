@@ -65,11 +65,7 @@ class HomePage extends Component {
       	<AccountsUIWrapper />	
         <h1>Snapshot</h1>
         <p>
-	        Lorem ipsum dolor sit amet, consectetur 
-	        adipiscing elit, sed do eiusmod tempor incididunt 
-	        labore et dolore magna aliqua. Ut enim ad minim 
-	        veniam, quis nostrud exercitation ullamco laboris 
-	        nisi ut aliquip ex ea commodo consequat.
+	        Welcome to Polaris! Please fill out your Snapshot.
         </p>
         {this.props.currentUser 
         	? <div>

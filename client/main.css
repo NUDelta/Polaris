@@ -1,6 +1,15 @@
 /* CSS declarations go here */
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+select{
+	font-size: 1.5em;
+	margin-bottom: 10px;
+}
+
+h5{
+	font-size: 1.2em;
+}
+
 html, body {
 	margin: 0;
 	padding: 0;
