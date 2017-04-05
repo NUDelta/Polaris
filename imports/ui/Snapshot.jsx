@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
+import { convertFromRaw } from 'draft-js';
+
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import {stateToHTML} from 'draft-js-export-html';
 import RichEditor from './RichEditor.jsx';
 import { Snapshots } from '../api/snapshots.js';
 import { Projects } from '../api/projects.js';
@@ -54,6 +57,11 @@ class Snapshot extends Component {
           break;
       }
     }
+    
+    if (text != "") {
+      console.log(text)
+      text = stateToHTML(convertFromRaw(JSON.parse(text)));
+    }    
 
     return text;
   }
@@ -80,7 +88,7 @@ class Snapshot extends Component {
       		<Col xs={12}>
       			<h2>{Strings.Input.THIS_WEEK_TITLE}</h2>
       			<p>{Strings.Input.THIS_WEEK_INSTRUCTIONS}</p>
-      			<p>{this.getResponseText("THIS_WEEK")}</p>
+      			<div dangerouslySetInnerHTML={{ __html: this.getResponseText("THIS_WEEK")}} />
       		</Col>
       	</Row>
       	<Row>
@@ -89,15 +97,15 @@ class Snapshot extends Component {
 
       			<h4>{Strings.Input.LEARNINGS_PROBLEM_TITLE}</h4>
       			<p>{Strings.Input.LEARNINGS_PROBLEM_INSTRUCTIONS}</p>
-      			<p>{this.getResponseText("LEARNING_PROBLEMS")}</p>
+            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("LEARNINGS_PROBLEM")}} />
 
       			<h4>{Strings.Input.LEARNINGS_INTERVENTION_TITLE}</h4>
       			<p>{Strings.Input.LEARNINGS_INTERVENTION_INSTRUCTIONS}</p>
-      			<p>{this.getResponseText("LEARNING_INTERVENTION")}</p>
+            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("LEARNINGS_INTERVENTION")}} />
 
       			<h4>{Strings.Input.LEARNINGS_RESULTS_TITLE}</h4>
       			<p>{Strings.Input.LEARNINGS_RESULTS_INSTRUCTIONS}</p>
-      			<p>{this.getResponseText("LEARNING_RESULTS")}</p>
+            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("LEARNINGS_RESULTS")}} />
       		</Col>
       	</Row>
       	<Row>
@@ -106,22 +114,22 @@ class Snapshot extends Component {
 
       			<h4>{Strings.Input.REFLECTION_ISSUE_TITLE}</h4>
       			<p>{Strings.Input.REFLECTION_ISSUE_INSTRUCTIONS}</p>
-      			<p>{this.getResponseText("REFLECTION_ISSUE")}</p>
+            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("REFLECTION_ISSUE")}} />
 
       			<h4>{Strings.Input.REFLECTION_IMPACT_TITLE}</h4>
       			<p>{Strings.Input.REFLECTION_IMPACT_INSTRUCTIONS}</p>
-      			<p>{this.getResponseText("REFLECTION_IMPACT")}</p>
+            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("REFLECTION_IMPACT")}} />
 
       			<h4>{Strings.Input.REFLECTION_CAUSE_TITLE}</h4>
       			<p>{Strings.Input.REFLECTION_CAUSE_INSTRUCTIONS}</p>
-      			<p>{this.getResponseText("REFLECTION_CAUSE")}</p>
+            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("REFLECTION_CAUSE")}} />
       		</Col>
       	</Row>
       	<Row>
       		<Col xs={12}>
       			<h2>{Strings.Input.NEXT_STEPS_TITLE}</h2>
       			<p>{Strings.Input.NEXT_STEPS_INSTRUCTIONS}</p>
-      			<p>{this.getResponseText("NEXT_STEPS")}</p>
+            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("NEXT_STEPS")}} />
       		</Col>
       	</Row>
       </Grid>
