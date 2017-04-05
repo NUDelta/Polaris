@@ -4,6 +4,8 @@ import { EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
 
 import Editor from 'draft-js-plugins-editor';
 import createAutosavePlugin from 'draft-js-autosave-plugin';
+import createAutoListPlugin from 'draft-js-autolist-plugin'
+
 
 
 
@@ -18,17 +20,19 @@ class MyEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    	editorState: this.createEditorState(),
+    	editorState: EditorState.createEmpty(),
     	firstEdit: false
     };
 
     const config = {
       saveFunction: this.saveToDB.bind(this),
-      debounceTime: 500,
+      debounceTime: 2000,
     	saveAlways: true
     }
 
     this.autosavePlugin = createAutosavePlugin(config);
+    this.autoListPlugin = createAutoListPlugin();
+
   }
 
   onChange(editorState){
@@ -62,8 +66,8 @@ class MyEditor extends React.Component {
   }
 
   saveToDB() {
-  	console.log('saveToDB');
   	if (this.props.snapshotID) {
+  		console.log('saveToDB');
     	let setAction = {}
     	const contentState = this.state.editorState.getCurrentContent();
     	const rawContent = JSON.stringify(convertToRaw(contentState));
@@ -76,18 +80,14 @@ class MyEditor extends React.Component {
 
   }
 
-  _onBoldClick() {
-    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
-  }
   render() {
     return (
       <div>
-        <button onClick={this._onBoldClick.bind(this)}>Bold</button>
         <Editor
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.onChange.bind(this)}
-          plugins={[this.autosavePlugin]}
+          plugins={[this.autosavePlugin, this.autoListPlugin]}
         />
       </div>
     );
