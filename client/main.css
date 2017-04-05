@@ -1,5 +1,5 @@
 /* CSS declarations go here */
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
 select{
 	font-size: 1.5em;
@@ -19,6 +19,32 @@ html, body {
 
 .card {
 	margin: 10px 0px;
+}
+
+.snapshotRoot {
+	line-height: 1.5;
+}
+
+.snapshotCard {
+	margin: 10px 0px;
+	padding: 10px 20px;
+}
+
+.snapshotCard div div {
+	font-size: 20px;
+}
+
+.snapshotSectionInstruction {
+	font-size: 15px;
+	color: #7f8c8d;
+	display: none;
+}
+
+.snapshotSubsection {
+	font-size: 20px;
+	font-weight: 700;
+	color: #34495e;
+	text-decoration: underline;
 }
 
 #editor {

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import { convertFromRaw } from 'draft-js';
-
+import {Card, CardTitle, CardText} from 'material-ui/Card';
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import {stateToHTML} from 'draft-js-export-html';
@@ -78,58 +78,66 @@ class Snapshot extends Component {
 
   render() {
     return (
-      <Grid>
+      <Grid fluid={true} className="snapshotRoot">
       	<Row>
       		<Col xs={12}>
       			<h1>{Strings.Input.MAIN_TILE}</h1>
       		</Col>
       	</Row>
       	<Row>
+        		<Col xs={12}>
+              <Card className="snapshotCard">
+          			<h1>{Strings.Input.THIS_WEEK_TITLE}</h1>
+          			<p className="snapshotSectionInstruction">{Strings.Input.THIS_WEEK_INSTRUCTIONS}</p>
+          			<div dangerouslySetInnerHTML={{ __html: this.getResponseText("THIS_WEEK")}} />
+              </Card>
+        		</Col>
+      	</Row>
+      	<Row>
       		<Col xs={12}>
-      			<h2>{Strings.Input.THIS_WEEK_TITLE}</h2>
-      			<p>{Strings.Input.THIS_WEEK_INSTRUCTIONS}</p>
-      			<div dangerouslySetInnerHTML={{ __html: this.getResponseText("THIS_WEEK")}} />
+            <Card className="snapshotCard">
+        			<h1>{Strings.Input.LEARNINGS_TITLE}</h1>
+
+        			<h4 className="snapshotSubsection">{Strings.Input.LEARNINGS_PROBLEM_TITLE}:</h4>
+        			<p className="snapshotSectionInstruction">{Strings.Input.LEARNINGS_PROBLEM_INSTRUCTIONS}</p>
+              <div dangerouslySetInnerHTML={{ __html: this.getResponseText("LEARNINGS_PROBLEM")}} />
+
+        			<h4 className="snapshotSubsection">{Strings.Input.LEARNINGS_INTERVENTION_TITLE}:</h4>
+        			<p className="snapshotSectionInstruction">{Strings.Input.LEARNINGS_INTERVENTION_INSTRUCTIONS}</p>
+              <div dangerouslySetInnerHTML={{ __html: this.getResponseText("LEARNINGS_INTERVENTION")}} />
+
+        			<h4 className="snapshotSubsection">{Strings.Input.LEARNINGS_RESULTS_TITLE}:</h4>
+        			<p className="snapshotSectionInstruction">{Strings.Input.LEARNINGS_RESULTS_INSTRUCTIONS}</p>
+              <div dangerouslySetInnerHTML={{ __html: this.getResponseText("LEARNINGS_RESULTS")}} />
+            </Card>
       		</Col>
       	</Row>
       	<Row>
       		<Col xs={12}>
-      			<h2>{Strings.Input.LEARNINGS_TITLE}</h2>
+            <Card className="snapshotCard">
+        			<h1>{Strings.Input.REFLECTION_TITLE}</h1>
 
-      			<h4>{Strings.Input.LEARNINGS_PROBLEM_TITLE}</h4>
-      			<p>{Strings.Input.LEARNINGS_PROBLEM_INSTRUCTIONS}</p>
-            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("LEARNINGS_PROBLEM")}} />
+        			<h4 className="snapshotSubsection">{Strings.Input.REFLECTION_ISSUE_TITLE}:</h4>
+        			<p className="snapshotSectionInstruction">{Strings.Input.REFLECTION_ISSUE_INSTRUCTIONS}</p>
+              <div dangerouslySetInnerHTML={{ __html: this.getResponseText("REFLECTION_ISSUE")}} />
 
-      			<h4>{Strings.Input.LEARNINGS_INTERVENTION_TITLE}</h4>
-      			<p>{Strings.Input.LEARNINGS_INTERVENTION_INSTRUCTIONS}</p>
-            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("LEARNINGS_INTERVENTION")}} />
+        			<h4 className="snapshotSubsection">{Strings.Input.REFLECTION_IMPACT_TITLE}:</h4>
+        			<p className="snapshotSectionInstruction">{Strings.Input.REFLECTION_IMPACT_INSTRUCTIONS}</p>
+              <div dangerouslySetInnerHTML={{ __html: this.getResponseText("REFLECTION_IMPACT")}} />
 
-      			<h4>{Strings.Input.LEARNINGS_RESULTS_TITLE}</h4>
-      			<p>{Strings.Input.LEARNINGS_RESULTS_INSTRUCTIONS}</p>
-            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("LEARNINGS_RESULTS")}} />
+        			<h4 className="snapshotSubsection">{Strings.Input.REFLECTION_CAUSE_TITLE}:</h4>
+        			<p className="snapshotSectionInstruction">{Strings.Input.REFLECTION_CAUSE_INSTRUCTIONS}</p>
+              <div dangerouslySetInnerHTML={{ __html: this.getResponseText("REFLECTION_CAUSE")}} />
+            </Card>
       		</Col>
       	</Row>
       	<Row>
       		<Col xs={12}>
-      			<h2>{Strings.Input.REFLECTION_TITLE}</h2>
-
-      			<h4>{Strings.Input.REFLECTION_ISSUE_TITLE}</h4>
-      			<p>{Strings.Input.REFLECTION_ISSUE_INSTRUCTIONS}</p>
-            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("REFLECTION_ISSUE")}} />
-
-      			<h4>{Strings.Input.REFLECTION_IMPACT_TITLE}</h4>
-      			<p>{Strings.Input.REFLECTION_IMPACT_INSTRUCTIONS}</p>
-            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("REFLECTION_IMPACT")}} />
-
-      			<h4>{Strings.Input.REFLECTION_CAUSE_TITLE}</h4>
-      			<p>{Strings.Input.REFLECTION_CAUSE_INSTRUCTIONS}</p>
-            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("REFLECTION_CAUSE")}} />
-      		</Col>
-      	</Row>
-      	<Row>
-      		<Col xs={12}>
-      			<h2>{Strings.Input.NEXT_STEPS_TITLE}</h2>
-      			<p>{Strings.Input.NEXT_STEPS_INSTRUCTIONS}</p>
-            <div dangerouslySetInnerHTML={{ __html: this.getResponseText("NEXT_STEPS")}} />
+            <Card className="snapshotCard">
+        			<h1>{Strings.Input.NEXT_STEPS_TITLE}</h1>
+        			<p className="snapshotSectionInstruction">{Strings.Input.NEXT_STEPS_INSTRUCTIONS}</p>
+              <div dangerouslySetInnerHTML={{ __html: this.getResponseText("NEXT_STEPS")}} />
+            </Card>
       		</Col>
       	</Row>
       </Grid>
