@@ -71,5 +71,8 @@ export default {
 	},
 	"Sidebar": {
 		"SECTION_FFT": "Food For Thought"
+	},
+	"Output": {
+		"MAIN_TILE": "Snapshot Output"
 	}
 }
