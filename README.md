@@ -1,4 +1,4 @@
-#Polaris Snapshot
+# Polaris Snapshot #
 
 To run the code - clone the repo and run the following command
 `meteor`
